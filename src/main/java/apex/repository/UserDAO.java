@@ -31,6 +31,8 @@ public class UserDAO {
 		}
 		return finalList;
 	}
+	
+	
 
 	private User convertMapToUserObject(Map<String, Object> mapobj) {
 		User u=new User();
@@ -41,6 +43,48 @@ public class UserDAO {
 		// TODO Auto-generated method stub
 		return u;
 	}
+
+
+
+	public User getUser(String userId) {
+		// TODO Auto-generated method stub
+		Map<String ,Object> myuser = (Map<String, Object>) template.queryForMap("SELECT * FROM apex.user where userid = ?",userId);
+		return convertMapToUserObject(myuser);
+	}
+
+
+
+	public User addUsers(String userid, String username, String passward) {
+		int numberofrows = template.update("insert into apex.user(userid , username ,passward ) values ( ? , ? , ? )",userid , username , passward );
+		if(numberofrows >0)
+		{
+			return getUser(userid);
+		}
+		return null;
+	}
+
+
+
+	public Boolean deleateUser(Integer id) {
+		int numberofrows = template.update("delete from apex.user where id = ? ", id);
+         System.out.println("no of row deleted" + numberofrows);
+		return numberofrows >0;
+		
+	}
+
+
+
+	public User updateUsers(User userObject, Integer id) {
+		int numberofrow = template.update("update apex.user set userid = ? , username = ? ,passward = ? where id = ?" ,userObject.getUserid(),userObject.getUsername(),userObject.getPassward(), id );
+		if(numberofrow >0)
+		{
+			return getUser(userObject.getUserid());
+		}
+		
+		return null;
+	}
+	
+	
 
 
 	

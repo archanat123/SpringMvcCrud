@@ -18,10 +18,11 @@ public class UserServices {
 	return dao.getUsers();
 	}
 	
-/*	public User getUsers(String userId)
+	public User getUser(String userId)
 	{
-	return dao.getUsers(userId);
+	return dao.getUser(userId);
 	}
+
 	 
 	public User addUsers(User userObject)
 	{
@@ -32,6 +33,24 @@ public class UserServices {
 	return dao.addUsers(userObject.getUserid(),userObject.getUsername(),userObject.getPassward());
 	
 	}
-	*/
+
+	private boolean validateDate(User userObject) {
+		// TODO Auto-generated method stub
+		return userObject != null;
+	}
+
+	public Boolean deleteUser(Integer id) {
+		// TODO Auto-generated method stub
+		return dao.deleateUser(id);
+	}
+
+	public User updateUsers(User userObject, Integer id) {
+		// TODO Auto-generated method stub
+		return dao.updateUsers(userObject,id);
+	}
+
+	
+
+
 
 }
